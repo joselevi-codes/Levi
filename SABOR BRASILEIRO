@@ -1,0 +1,208 @@
+programa
+{
+	funcao inicio()
+	{
+		// Declaração de variáveis
+		inteiro opcao_prato, opcao_pagamento, quantidade_pratos
+		inteiro opcao_bebida, quantidade_bebidas = 0 // Novas variáveis para bebidas
+		
+		real preco_unitario = 22.00
+		real preco_bebida = 0.0 // Preço unitário da bebida escolhida
+		
+		real total_parcial = 0.0
+		real total_final = 0.0
+		real custo_ingrediente_total = 0.0
+		
+		cadeia prato_nome = ""
+		cadeia bebida_nome = "Nenhuma" // Nome da bebida padrão
+		cadeia pagamento_nome = ""
+		cadeia nome_cliente = ""
+		cadeia telefone_cliente = ""
+		cadeia endereco_cliente = ""
+
+		escreva("=== SISTEMA SABOR BRASILEIRO: DELIVERY COM BEBIDAS ===\n")
+		escreva("Pratos executivos e bebidas geladas com preço que cabe no bolso!\n\n")
+
+		// Cadastro dos dados do cliente para a entrega
+		escreva("Olá! Digite o seu NOME para começar: ")
+		leia(nome_cliente)
+
+		escreva("Digite o seu TELEFONE de contato: ")
+		leia(telefone_cliente)
+
+		escreva("Digite o seu ENDEREÇO completo: ")
+		leia(endereco_cliente)
+		
+		escreva("\nObrigado, ", nome_cliente, "! Dados salvos.\n")
+		escreva("----------------------------------------------------------------------\n")
+
+		// ==================================================
+		// ETAPA 1: SELEÇÃO DO PRATO
+		// ==================================================
+		escreva("--- CARDÁPIO DO DIA (Preço Unitário: R$ 22.00) ---\n")
+		escreva("1) Virado à Paulista\n")
+		escreva("2) Feijoada Light\n")
+		escreva("3) Bife a Cavalo\n")
+		escreva("--------------------------------------------------\n")
+		escreva("Escolha o prato desejado (1 a 3): ")
+		leia(opcao_prato)
+
+		// Solicita a quantidade de marmitas
+		escreva("Quantas unidades deste prato você deseja pedir? ")
+		leia(quantidade_pratos)
+
+		// Validação simples de quantidade do prato
+		se (quantidade_pratos <= 0)
+		{
+			escreva("\nQuantidade inválida! O pedido precisa ter pelo menos 1 item.\n")
+			retorne
+		}
+
+		// Processamento do prato, receita e valor unitário dos ingredientes
+		escolha(opcao_prato)
+		{
+			caso 1:
+				prato_nome = "Virado à Paulista"
+				custo_ingrediente_total = (1.20 + 2.00 + 4.50 + 0.60 + 0.80) * quantidade_pratos
+				escreva("\n--- RECEITA E CUSTO DOS INGREDIENTES (Por unidade) ---\n")
+				escreva("* Arroz Branco: .................. R$ 1.20\n")
+				escreva("* Tutu de Feijão + Farinha: ...... R$ 2.00\n")
+				escreva("* Bisteca de Porco (1 un): ....... R$ 4.50\n")
+				escreva("* Ovo Frito (1 un): .............. R$ 0.60\n")
+				escreva("* Couve Refogada: ................ R$ 0.80\n")
+				escreva("--------------------------------------------------\n")
+				escreva("-> PREPARO: Grelhe a bisteca. Refogue o feijão com farinha. Monte com arroz, couve e o ovo por cima.\n")
+				pare
+			caso 2:
+				prato_nome = "Feijoada Light"
+				custo_ingrediente_total = (1.50 + 6.00 + 1.20 + 1.50 + 0.70) * quantidade_pratos
+				escreva("\n--- RECEITA E CUSTO DOS INGREDIENTES (Por unidade) ---\n")
+				escreva("* Feijão Preto: .................. R$ 1.50\n")
+				escreva("* Carnes (Lombo, paio, etc): ..... R$ 6.00\n")
+				escreva("* Arroz Branco: .................. R$ 1.20\n")
+				escreva("* Couve e Farofa: ................ R$ 1.50\n")
+				escreva("* Tempero, Louro e Laranja: ....... R$ 0.70\n")
+				escreva("--------------------------------------------------\n")
+				escreva("-> PREPARO: Dessalgue as carnes. Cozinhe o feijão com as carnes e louro até engrossar. Ponha laranja no final.\n")
+				pare
+			caso 3:
+				prato_nome = "Bife a Cavalo"
+				custo_ingrediente_total = (6.50 + 1.20 + 2.20 + 1.80) * quantidade_pratos
+				escreva("\n--- RECEITA E CUSTO DOS INGREDIENTES (Por unidade) ---\n")
+				escreva("* Bife de Alcatra/Contrafilé: .... R$ 6.50\n")
+				escreva("* Ovos Fritos (2 un): ............ R$ 1.20\n")
+				escreva("* Arroz e Feijão: ................ R$ 2.20\n")
+				escreva("* Batata Frita: .................. R$ 1.80\n")
+				escreva("--------------------------------------------------\n")
+				escreva("-> PREPARO: Tempere e grelhe o bife. Frite dois ovos com gema mole e coloque por cima da carne.\n")
+				pare
+			caso contrario:
+				escreva("\nOpção de prato inválida!\n")
+				retorne
+		}
+
+		// ==================================================
+		// NOVA ETAPA 2: SELEÇÃO DE BEBIDAS
+		// ==================================================
+		escreva("\n--- MENU DE BEBIDAS GELADAS ---\n")
+		escreva("1) Refrigerante Lata ... R$ 5.00\n")
+		escreva("2) Suco Natural (500ml)  R$ 7.00\n")
+		escreva("3) Não quero bebida\n")
+		escreva("--------------------------------\n")
+		escreva("Escolha sua opção de bebida (1 a 3): ")
+		leia(opcao_bebida)
+
+		se (opcao_bebida == 1 ou opcao_bebida == 2)
+		{
+			escreva("Quantas unidades desta bebida você deseja? ")
+			leia(quantidade_bebidas)
+			
+			se (quantidade_bebidas <= 0)
+			{
+				escreva("Quantidade inválida! Nenhuma bebida adicionada.\n")
+				quantidade_bebidas = 0
+			}
+			senao
+			{
+				se (opcao_bebida == 1)
+				{
+					bebida_nome = "Refrigerante Lata"
+					preco_bebida = 5.00
+				}
+				senao
+				{
+					bebida_nome = "Suco Natural"
+					preco_bebida = 7.00
+				}
+			}
+		}
+		senao
+		{
+			bebida_nome = "Nenhuma"
+			preco_bebida = 0.0
+			quantidade_bebidas = 0
+		}
+
+		// Calcula o total parcial somando a comida e as bebidas
+		total_parcial = (preco_unitario * quantidade_pratos) + (preco_bebida * quantidade_bebidas)
+
+		// ==================================================
+		// ETAPA 3: FORMAS DE PAGAMENTO
+		// ==================================================
+		escreva("\n--- FORMAS DE PAGAMENTO ---\n")
+		escreva("1) Pix (5% de desconto no total do pedido!)\n")
+		escreva("2) Cartão de Débito\n")
+		escreva("3) Dinheiro\n")
+		escreva("---------------------------\n")
+		escreva("Escolha a forma de pagamento (1 a 3): ")
+		leia(opcao_pagamento)
+
+		// Processamento do pagamento com desconto baseado no total acumulado
+		escolha(opcao_pagamento)
+		{
+			caso 1:
+				pagamento_nome = "Pix"
+				total_final = total_parcial * 0.95 // Desconto de 5% sobre tudo
+				pare
+			caso 2:
+				pagamento_nome = "Cartão de Débito"
+				total_final = total_parcial
+				pare
+			caso 3:
+				pagamento_nome = "Dinheiro"
+				total_final = total_parcial
+				pare
+			caso contrario:
+				escreva("\nOpção de pagamento inválida!\n")
+				retorne
+		}
+
+		// ==================================================
+		// ETAPA 4: EXIBIÇÃO DO TICKET DE ENTREGA
+		// ==================================================
+		escreva("\n==================================================\n")
+		escreva("         TICKET DE ENTREGA - DELIVERY ONLINE      \n")
+		escreva("==================================================\n")
+		escreva("Cliente:          ", nome_cliente, "\n")
+		escreva("Telefone:         ", telefone_cliente, "\n")
+		escreva("Endereço:         ", endereco_cliente, "\n")
+		escreva("--------------------------------------------------\n")
+		escreva("Prato Pedido:     ", prato_nome, " (", quantidade_pratos, "x)\n")
+		
+		se (quantidade_bebidas > 0)
+		{
+			escreva("Bebida Pedida:    ", bebida_nome, " (", quantidade_bebidas, "x)\n")
+		}
+		senao
+		{
+			escreva("Bebida Pedida:    Nenhuma\n")
+		}
+		
+		escreva("--------------------------------------------------\n")
+		escreva("Custo total ing.: R$ ", custo_ingrediente_total, "\n")
+		escreva("Forma de Pago:    ", pagamento_nome, "\n")
+		escreva("Total Geral:      R$ ", total_final, "\n")
+		escreva("==================================================\n")
+		escreva("Pedido confirmado! Tudo embalado e pronto para a entrega!\n")
+	}
+}
